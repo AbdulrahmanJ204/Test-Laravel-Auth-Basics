@@ -10,12 +10,12 @@ class ProfileUpdateRequest extends FormRequest
 {
     public function rules()
     {
-        return  [
+        return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'string', 'max:255', Rule::unique('users')->ignore(Auth::user())],
             'password' => ['sometimes', 'required_with:old_password', 'string', 'confirmed', 'min:8'],
         ];
-        }
+    }
 
     public function authorize()
     {
@@ -26,7 +26,6 @@ class ProfileUpdateRequest extends FormRequest
     {
         if ($this->password == null) {
             $this->request->remove('password');
-            $this->request->remove('password_confirmation');
         }
     }
 }
